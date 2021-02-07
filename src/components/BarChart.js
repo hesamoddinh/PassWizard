@@ -31,7 +31,7 @@ export default  class BarChart extends Component {
 
     componentDidMount() {
 
-      axios.get(`http://20.82.112.97:5000/alldata`)
+      axios.get(`https://passwizardbackend.herokuapp.com/alldata`)
       .then(res => {
         const data = res.data;
         this.setState({allInfo:data})
@@ -153,7 +153,7 @@ export default  class BarChart extends Component {
             {
               label: 'Second Grade',
               data:  this.state.BarchartdataSecond,
-              backgroundColor: ' rgba(233,216,141)',
+              backgroundColor:   '#e2975d',
               
               //borderColor: 'red',
             },

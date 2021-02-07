@@ -31,7 +31,7 @@ export default  class PieChart extends Component {
 
     componentDidMount() {
 
-      axios.get(`http://20.82.112.97:5000/alldata`)
+      axios.get(`https://passwizardbackend.herokuapp.com/alldata`)
       .then(res => {
         const data = res.data;
         this.setState({allInfo:data})
@@ -55,12 +55,17 @@ export default  class PieChart extends Component {
         for (var i = 0; i < this.state.allInfo.length; i++) {
               // console.log(this.state.allInfo[i].GG1)
               // retrieving sex
-              if(this.state.allInfo[i].GC1 == "pass"){
-              absences.push(this.state.allInfo[i].absences );
+             
               // retriving first Grade
+            
+              if(this.state.allInfo[i].GC1 == "pass"){
+                montherEdu.push(this.state.allInfo[i].Medu );
+                fatherEdu.push(this.state.allInfo[i].Fedu);
+              absences.push(this.state.allInfo[i].absences );
+              
+              if(this.state.allInfo[i].failures=="1"){
               examFailure.push(this.state.allInfo[i].failures );             
-              montherEdu.push(this.state.allInfo[i].Medu );
-              fatherEdu.push(this.state.allInfo[i].Fedu);
+              }
              // gradeFirst.push(this.state.allInfo[i].G1);
 
             }
@@ -84,11 +89,12 @@ export default  class PieChart extends Component {
             // }
 
           }
+            examFailure = examFailure.length
             // make average
             const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
     
             absences = average(  absences );
-            examFailure = average( examFailure);
+            // examFailure = average( examFailure);
             montherEdu = average( montherEdu);
             fatherEdu = average( fatherEdu );
             absences2 = average(  absences2 );
@@ -172,7 +178,7 @@ render()
         options={{
           title:{
             display:true,
-            text:'The Most Effective Attributes On Grade 1'
+            text:'Some effective Attributes on Grade1'
           },
         //   maintainAspectRatio: false,
           scales: {

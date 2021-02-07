@@ -51,7 +51,7 @@ export default class SecondPrediction extends Component {
       "Fedu": this.state.FatherrEducational,
       "G1": this.state.FirstGrade
     };
-    axios.post(`http://20.82.112.97:5000/predict/por/G2`, data)
+    axios.post(`https://passwizardbackend.herokuapp.com/predict/por/G2`, data)
     .then(res => {
       const result = res.data;
       // console.log(result)
@@ -85,10 +85,10 @@ export default class SecondPrediction extends Component {
           <Container>
             <Header/>
 
-              <div class="card  ">
-                <img src={predict} class="img-fluid" alt="Responsive image" style={{"height":"450px","width":"100%"}}></img>
-                  <div class="card-img-overlay">
-                    <h1 className="card-title text-center font-weight-bold text-white" style={{"font-size":"49px"}} >Start Predict your Second Grade!</h1>  
+              <div className="card  ">
+                <img src={predict} className="img-fluid" alt="Responsive image" style={{"height":"300px","width":"100%"}}></img>
+                  <div className="card-img-overlay">
+                    <h1 className="card-title text-center font-weight-bold text-white" style={{"fontSize":"49px"}} >Start Predict your Second Grade!</h1>  
                   </div>
               </div>
               <Button className={'mt-3'} onClick={
@@ -109,8 +109,8 @@ export default class SecondPrediction extends Component {
               <Col className="mt-5" md="6">
 
                 <form className="p-3 pr-5">
-                  <div class="form-group pt-4 ">
-                    <label for="customRange1" class="form-label my-3">Your first exam grade:</label><br/>
+                  <div className="form-group pt-4 ">
+                    <label for="customRange1" className="form-label my-3">Your first exam grade:</label><br/>
 
                       <Slider
                         defaultValue={20}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row,Col,Container,Input} from 'reactstrap';
+import { Row,Col,Container,Input,CustomInput} from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import Header from './Header';
 import Footer from './Footer';
@@ -31,7 +31,7 @@ export default class FirstPrediction extends Component {
       examFailuresVis:'',
       motherEducationVis:'',
       fatherEducationVis:'',
-      data:[32, 20, 4 , 4]
+      data:[32, 0, 4 , 4]
       
         
     };
@@ -55,7 +55,7 @@ export default class FirstPrediction extends Component {
       "Fedu": this.state.FatherEducational,
       "Medu": this.state.MotherEducational,
     };
-    axios.post(`http://20.82.112.97:5000/predict/por/pf`, data)
+    axios.post(`https://passwizardbackend.herokuapp.com/predict/por/pf`, data)
     .then(res => {
       const result = res.data;
       console.log(result)
@@ -100,10 +100,10 @@ export default class FirstPrediction extends Component {
           
             <Header/>
 
-            <div class="card  ">
-              <img src={predict} class="img-fluid" alt="Responsive image" style={{"height":"450px","width":"100%"}}></img>
-              <div class="card-img-overlay">
-                  <h1 className="card-title text-center font-weight-bold text-white" style={{"font-size":"49px"}} >Start Predict all of your Grades!</h1>
+            <div className="card  ">
+              <img src={predict} className="img-fluid" alt="Responsive image" style={{"height":"300px","width":"100%"}}></img>
+              <div className="card-img-overlay">
+                  <h1 className="card-title text-center font-weight-bold text-white" style={{"fontSize":"49px"}} >Start Predict all of your Grades!</h1>
                   
               </div>
             </div>
@@ -126,8 +126,8 @@ export default class FirstPrediction extends Component {
               <Col className="mt-5 pt-3" md="6">
 
                 <form className="p-3 pr-5">
-                  <div class="form-group pt-4">
-                    <label for="customRange1" class="form-label my-3">Number of previous absences:</label><br/>
+                  <div className="form-group pt-4">
+                    <label for="customRange1" className="form-label my-3">Number of previous exam failures:</label><br/>
 
                       <Slider
                         defaultValue={32}
@@ -143,38 +143,8 @@ export default class FirstPrediction extends Component {
                             const data = state.data.map((item, j) => {
                               if (j === 0) {
                                 return newValue;
-                              }else{
-                                return item;
-                              }
-                            });
-                      
-                            return {
-                              data,
-                            };
-                          })
-                          
-                        }} 
-                      />
-                  </div>
-                  <div class="form-group pt-4">
-                    <label for="customRange1" class="form-label my-3">Number of previous exam failures:</label><br/>
-
-                      <Slider
-                        defaultValue={20}
-                        // getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider"
-                        valueLabelDisplay="auto"
-                        step={1}
-                        marks
-                        min={0}
-                        max={20}
-                        onChange={(event, newValue) => {
-                          this.setState(state => {
-                            const data = state.data.map((item, j) => {
-                              if (j === 0) {
-                                return item;
                               } else if(j === 1) {
-                                return newValue;
+                                return item;
                               }else{
                                 return item;
                               }
@@ -188,8 +158,8 @@ export default class FirstPrediction extends Component {
                         }} 
                       />
                   </div>
-                  <div class="form-group pt-4">
-                    <label for="customRange1" class="form-label my-3">Mother educational background:</label><br/>
+                  <div className="form-group pt-1">
+                    <label for="customRange1" className="form-label my-3">Mother educational background:</label><br/>
 
                     <Input type="select" name="select" id="MotherEducationalbg" 
                     onChange={
@@ -218,8 +188,8 @@ export default class FirstPrediction extends Component {
                       <option value="4" selected="selected">higher education</option>
                     </Input>
                   </div>
-                  <div class="form-group pt-4">
-                    <label for="customRange1" class="form-label my-3">Father educational background:</label><br/>
+                  <div className="form-group pt-1">
+                    <label for="customRange1" className="form-label my-3">Father educational background:</label><br/>
 
                     <Input type="select" name="select" id="FatherEducationalbg" 
                     onChange={
@@ -248,6 +218,46 @@ export default class FirstPrediction extends Component {
                       <option value="4" selected="selected">higher education</option>
                     </Input>
                   </div>
+                  <div className="form-group pt-4">
+                  <CustomInput type="switch" id="exampleCustomSwitch" name="customSwitch" label="Are you willing to take higher education?"
+                  
+                  onChange={e => {
+                    if (e.target.checked){
+
+                      this.setState(state => {
+                        const data = state.data.map((item, j) => {
+                          if(j === 1) {
+                            return 10;
+                          }else{
+                            return item;
+                          }
+                        });
+                  
+                        return {
+                          data,
+                        };
+                      })
+                      
+                      }else{
+                        this.setState(state => {
+                          const data = state.data.map((item, j) => {
+                            if(j === 1) {
+                              return 0;
+                            }else{
+                              return item;
+                            }
+                          });
+                    
+                          return {
+                            data,
+                          };
+                        })
+                      }
+                    } 
+                    }
+                    
+                  />    
+                  </div>
                 </form>
               </Col>
 
@@ -256,7 +266,7 @@ export default class FirstPrediction extends Component {
                   <Pie
                     data={{
 
-                        labels: ['Absences', 'Failures','Mother Education', 'Father Education'],
+                        labels: [ 'Failures','higher education','Mother Education', 'Father Education'],
                         datasets: [
                         {
                             label: 'The Most Effective Attributes On Grade 1 and Grade 2',
@@ -326,7 +336,7 @@ export default class FirstPrediction extends Component {
   <div className="form-row">
     <div className="form-group col-md-12">
       <label>Do you want to take higher education:</label>
-      <Input type="select" name="select" id="higher" onChange={e => {this.setState({'school': e.target.value})}}>
+      <Input type="select" name="select" id="higher" onChange={e => {this.setState({'higher': e.target.value})}}>
             <option value="0">Yes</option>
             <option value="1">No</option>
       </Input>
