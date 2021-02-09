@@ -36,7 +36,7 @@ export default class Performance extends Component {
           <HorizontalLinearStepper />
           </div>
 
-         <Row className="justify-content-sm-center my-4 ">
+          <Row className="justify-content-sm-center my-4 ">
             <Col md="4" >
                     <Link to="/FirstPrediction">
                         <Card body inverse id="ContactUsBox" style={{border: '1px solid #cacaca' , width: '100%' ,height:'200px',textAlign:'center',backgroundColor:'white', paddingTop: '40px' }}>
