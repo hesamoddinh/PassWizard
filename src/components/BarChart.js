@@ -40,7 +40,7 @@ export default  class BarChart extends Component {
 
         // Create a new array based on current state:
         
-        let travelt = [];
+         let travelt = [];
         let studyt = [];
         let freet = [];
         let absencesAmount = [];
@@ -125,8 +125,8 @@ export default  class BarChart extends Component {
           labels: ['Traveltime', 'Studytime', 'Freetime', 'Absences'],
           datasets: [
             {
-              label: 'First Grade',
-              data: this.state.Barchartdata,
+              label: 'Second Exam',
+              data: this.state.BarchartdataSecond,
               backgroundColor: [
                
                  'rgba(190,91,104)',
@@ -150,13 +150,13 @@ export default  class BarChart extends Component {
               ],
               borderWidth: 1,
             },
-            {
-              label: 'Second Grade',
-              data:  this.state.BarchartdataSecond,
-              backgroundColor:   '#e2975d',
+//             {
+//               label: 'Second Grade',
+//               data:  this.state.BarchartdataSecond,
+//               backgroundColor:   '#e2975d',
               
-              //borderColor: 'red',
-            },
+//               //borderColor: 'red',
+//             },
           ],
         }}
         height={200}
@@ -164,7 +164,7 @@ export default  class BarChart extends Component {
         options={{
           title:{
             display:true,
-            text:'Attributes Distribution On First And Second Grade'
+            text:'Attributes Distribution for students who passed Second Exam'
           },
         //   maintainAspectRatio: false,
           scales: {
