@@ -48,7 +48,7 @@ export default class SecondPrediction extends Component {
       "failures": this.state.failures,
       "Walc": this.state.WeekendAlcohol,
       "Medu": this.state.MotherEducational,
-      "Fedu": this.state.FatherrEducational,
+      "Fedu": this.state.FatherEducational,
       "G1": this.state.FirstGrade
     };
     axios.post(`https://passwizardbackend.herokuapp.com/predict/por/G2`, data)
