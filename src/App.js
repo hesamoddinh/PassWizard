@@ -78,8 +78,8 @@ function App() {
                       activeLinkFromLocation
                       />
                   </Col>
-                  <Col md="2" ></Col>
-                  <Col md="8"  >
+                  <Col md="1" ></Col>
+                  <Col md="9"  >
                     <Switch>
                       <Route exact path="/" component = {Landing} />
                       <Route exact path="/Dataset" component = {Dataset} />
