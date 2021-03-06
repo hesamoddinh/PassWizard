@@ -72,14 +72,14 @@ function App() {
 
         <Container fluid>
               <Row>
-                  <Col md="2">
+                  <Col md="3">
                       <MetisMenu
                       content={menu}
                       activeLinkFromLocation
                       />
                   </Col>
-                  <Col md="1" ></Col>
-                  <Col md="9"  >
+                  
+                  <Col md="8"  >
                     <Switch>
                       <Route exact path="/" component = {Landing} />
                       <Route exact path="/Dataset" component = {Dataset} />
